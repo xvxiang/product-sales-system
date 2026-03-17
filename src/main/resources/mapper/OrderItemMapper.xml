@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xvxiang.productsalessystem.mapper.OrderItemMapper">
+
+    <resultMap id="BaseResultMap" type="com.xvxiang.productsalessystem.entity.OrderItem">
+        <id column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_code" property="productCode"/>
+        <result column="product_name" property="productName"/>
+        <result column="price" property="price"/>
+        <result column="quantity" property="quantity"/>
+        <result column="amount" property="amount"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <resultMap id="SalesTrendResultMap" type="com.xvxiang.productsalessystem.dto.SalesTrendDTO">
+        <result column="product_id" property="productId"/>
+        <result column="product_code" property="productCode"/>
+        <result column="product_name" property="productName"/>
+        <result column="quantity" property="quantity"/>
+        <result column="order_date" property="orderDate"/>
+    </resultMap>
+
+    <!-- 按日期统计商品销售数量 -->
+    <select id="selectSalesTrend" resultMap="SalesTrendResultMap">
+        SELECT 
+            oi.product_id,
+            oi.product_code,
+            oi.product_name,
+            SUM(oi.quantity) as quantity,
+            o.order_date
+        FROM order_item oi
+        INNER JOIN orders o ON oi.order_id = o.id
+        WHERE oi.product_id = #{productId}
+        AND o.order_date BETWEEN #{startDate} AND #{endDate}
+        GROUP BY oi.product_id, oi.product_code, oi.product_name, o.order_date
+        ORDER BY o.order_date ASC
+    </select>
+
+    <select id="selectByProductId" resultMap="BaseResultMap">
+        SELECT * FROM order_item WHERE product_id = #{productId}
+    </select>
+</mapper>
