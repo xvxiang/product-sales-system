@@ -138,45 +138,6 @@ http://localhost:8080/index.html
 ### 3. 导入失败
 确保 Excel 文件格式正确，第一行为表头，数据从第二行开始。
 
-### 4. 图表不显示
-检查网络是否正常，ECharts 库需要从 CDN 加载。
-
-## 项目结构
-
-```
-product-sales-system/
-├── src/
-│   ├── main/
-│   │   ├── java/com/xvxiang/productsalessystem/
-│   │   │   ├── controller/      # 控制器层
-│   │   │   ├── service/         # 服务层
-│   │   │   ├── mapper/          # Mapper 层
-│   │   │   ├── entity/          # 实体类
-│   │   │   ├── common/          # 通用类
-│   │   │   ├── config/          # 配置类
-│   │   │   └── ProductSalesSystemApplication.java
-│   │   └── resources/
-│   │       ├── mapper/          # MyBatis XML
-│   │       ├── static/          # 静态资源
-│   │       │   └── index.html   # 前端页面
-│   │       ├── schema.sql       # 数据库脚本
-│   │       └── application.yml  # 配置文件
-│   └── test/
-├── pom.xml
-└── README.md
-```
-
-## 下一步优化建议
-
-1. **安全性**: 添加用户认证和授权 (Spring Security + JWT)
-2. **缓存**: 使用 Redis 缓存热点数据
-3. **搜索**: 集成 Elasticsearch 实现高级搜索
-4. **前端**: 使用 Vue CLI 创建独立的前端项目
-5. **部署**: Docker 容器化部署
-6. **监控**: 添加 Spring Boot Actuator 监控
-
-## 许可证
-MIT License
 
 ## 联系方式
 如有问题，请提交 Issue 或联系开发者。
